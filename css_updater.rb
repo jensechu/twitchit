@@ -3,7 +3,7 @@ require "dotenv"
 
 Dotenv.load(File.join(File.dirname(__FILE__), '.env'))
 
-SUBREDDIT = "girlgamerscss"
+SUBREDDIT = ENV["SUBREDDIT"]
 
 template        = File.join(File.dirname(__FILE__), "template.css")
 @active_template = File.join(File.dirname(__FILE__), "current.css")

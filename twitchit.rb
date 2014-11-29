@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require "dotenv"
 require "kappa"
 require_relative "css_updater"
