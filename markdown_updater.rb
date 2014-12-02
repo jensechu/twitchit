@@ -26,26 +26,25 @@ settings = @redd.about_edit(ENV["SUBREDDIT"])
 @attrs[:submit_link_label]  = ''
 @attrs[:submit_text_label]  = ''
 @attrs[:type]               = @attrs[:subreddit_type]
-@attrs[:description]        = @attrs[:description]
+@attrs[:description]        = ''
 
 def updateStreamers(current_streamers, all_streamers)
-  all_streamers.each { |user|
-    offline_text = "[#{user}](http://www.twitch.tv/#{user})"
+  current_streamers.each { |user|
+    online_text  = "
+      [#{user[:name]}](http://www.twitch.tv/#{user[:name]} 'twitch-online') \n
+      *→ playing #{user[:game]}*"
 
-    unless current_streamers.include? user
-      @new_markdown.sub! "twitchit(#{user})", offline_text
-    end
+    @new_markdown.sub! "twitchit(#{user[:name]})", online_text
   }
 
-  current_streamers.each { |user|
-    online_text  = "[#{user} IS ONLINE](http://www.twitch.tv/#{user})"
-
-    @new_markdown.sub! "twitchit(#{user})", online_text
+  all_streamers.each { |user|
+    offline_text = "[#{user}](http://www.twitch.tv/#{user} 'twitch-offline')"
+    @new_markdown.sub! "twitchit(#{user})", offline_text
   }
 
   # Convert to proper markdown because Reddit API doesn't return these as markdown
-  @attrs[:description].gsub! '&gt;', '>'
-  @attrs[:description].gsub! '&lt;', '<'
+  @new_markdown.gsub! '&gt;', '>'
+  @new_markdown.gsub! '&lt;', '<'
 
   # If current markdown is already accurate then exit
   if @current_markdown == @new_markdown
@@ -58,5 +57,6 @@ def updateStreamers(current_streamers, all_streamers)
   result = @redd.edit_stylesheet(ENV["SUBREDDIT"], @new_markdown)
 
   # Update the live markdown
+  @attrs[:description] = @new_markdown
   @redd.site_admin(@attrs)
 end

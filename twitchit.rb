@@ -15,7 +15,11 @@ def fetchCurrentStreamers()
   all_streamers    = IO.readlines(File.join(File.dirname(__FILE__), "whitelist.txt")).map(&:chomp)
 
   Twitch.streams.find(:channel => all_streamers) do |stream|
-    current_streamers << stream.channel.name
+    streamer = {}
+    streamer[:name] = stream.channel.name
+    streamer[:game] = stream.game_name
+
+    current_streamers << streamer
   end
 
   updateStreamers(current_streamers, all_streamers)
