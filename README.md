@@ -5,7 +5,24 @@ Twitchit is a Twitch streamer status indicator for subreddits. Twitchit polls th
 
 
 ## Example
-![http://i.imgur.com/X65FuGl.png](http://i.imgur.com/JSNSsb2.png)
+
+## Usage
+
+* `git clone https://github.com/jensechu/twitchit.git`
+* `cd twitchit`
+* `touch .env`
+* Edit `.env`
+```
+USERNAME="REDDIT_USERNAME"
+PASSWORD="REDDIT_PASSWORD"
+TWITCH_ID="TWITCH_API_KEY"
+SUBREDDIT="SUBREDDIT"
+```
+* `bundle install`
+* Edit `whitelist.txt` to have a list of valid twitch users
+* Edit `template.md` to have the master copy of your subreddit markdown
+* Edit `template.md` with `twitchit(TWITCH_USER)` where you want the online/offline indicators to be for each user
+* Run `ruby twitchit.rb`
 
 ## Online Twitch Stream
 
