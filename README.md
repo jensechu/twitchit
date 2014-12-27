@@ -5,8 +5,9 @@ Twitchit is a Twitch streamer status indicator for subreddits. Twitchit polls th
 
 
 ## Example
+![http://i.imgur.com/n4AeSyX.png](http://i.imgur.com/n4AeSyX.png)
 
-## Usage
+## Setup Instructions
 
 * `git clone https://github.com/jensechu/twitchit.git`
 * `cd twitchit`
@@ -23,10 +24,15 @@ SUBREDDIT="SUBREDDIT"
 * Edit `template.md` to have the master copy of your subreddit markdown
 * Edit `template.md` with `twitchit(TWITCH_USER)` where you want the online/offline indicators to be for each user
 * Run `ruby twitchit.rb`
+* Create CRON job to run every minute
+```
+#min hour day month weekday command
+*/1   *    *    *    *     ruby twitchit.rb
+```
 
 ## Online Twitch Stream
 
-#### Markdown
+#### Generated Markdown
 ```
 * [TWITCH_USER](http://www.twitch.tv/TWITCH_USER 'twitch-online') 
   *playing Grand Theft Auto V*
@@ -42,7 +48,7 @@ a[title="twitch-online"] {
 
 ## Offline Twitch Stream
 
-#### Markdown
+#### Generated Markdown
 ```
 * [TWITCH_USER](http://www.twitch.tv/TWITCH_USER 'twitch-offline')
 ```
