@@ -2,7 +2,7 @@
 
 require "dotenv"
 require "kappa"
-require_relative "css_updater"
+require_relative "markdown_updater"
 
 Dotenv.load(File.join(File.dirname(__FILE__), '.env'))
 
